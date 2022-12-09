@@ -6,11 +6,15 @@ using UnityEngine;
 public class Movemeny : MonoBehaviour
 {
     public float velocity;
+    public GameObject txt;
+    public GameObject fade;
+    public bool textAnimation;
     
 
     void Start()
     {
-        
+        txt.SetActive(false);
+        fade.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,6 +39,21 @@ public class Movemeny : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Fantasma"))
+        {
+
+            
+            textAnimation = true;
+            Destroy(this.gameObject);
+            txt.SetActive(true);
+            fade.SetActive(true);
+
+
         }
     }
 }
