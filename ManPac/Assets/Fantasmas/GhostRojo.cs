@@ -15,6 +15,10 @@ public class GhostRojo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GhostRed.destination = pacman.transform.position;
+        if(pacman != null)
+        {
+            GhostRed.destination = pacman.transform.position;
+        }
+      
     }
 }

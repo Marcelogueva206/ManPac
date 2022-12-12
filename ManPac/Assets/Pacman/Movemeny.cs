@@ -22,21 +22,21 @@ public class Movemeny : MonoBehaviour
     {
 
         transform.position += transform.forward * velocity * Time.deltaTime; 
-       if(Input.GetKeyDown(KeyCode.D))
+       if(Input.GetKeyDown(KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.localRotation = Quaternion.Euler(0, 90, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.localRotation = Quaternion.Euler(0, -90, 0);
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
