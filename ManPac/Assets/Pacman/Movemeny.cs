@@ -9,10 +9,17 @@ public class Movemeny : MonoBehaviour
     public GameObject txt;
     public GameObject fade;
     public bool textAnimation;
-    
+
+    private Rigidbody rb; 
+    public float Velocity;
+    private Vector3 HV; 
+    private float ScreenHeight, ScreenWidth;
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
+        ScreenHeight = Screen.height; 
+        ScreenWidth = Screen.width;
         txt.SetActive(false);
         fade.SetActive(false);
     }
@@ -21,7 +28,10 @@ public class Movemeny : MonoBehaviour
     void Update()
     {
 
-        transform.position += transform.forward * velocity * Time.deltaTime; 
+        MovimientoTouch();
+
+        
+        //transform.position += transform.forward * velocity * Time.deltaTime; 
        if(Input.GetKeyDown(KeyCode.D)|| Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.localRotation = Quaternion.Euler(0, 90, 0);
@@ -39,6 +49,40 @@ public class Movemeny : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+    }
+
+
+    public void MovimientoTouch()
+    {
+        if (Input.touchCount > 0)
+        {
+
+            if (Input.GetTouch(0).position.y > ScreenHeight / 2)
+            {
+                HV = Vector3.forward * Velocity;
+                rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
+            }
+
+            else if (Input.GetTouch(0).position.y < ScreenHeight / 2)
+            {
+                HV = Vector3.back * Velocity;
+                rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
+            }
+
+
+            if (Input.GetTouch(0).position.x < ScreenWidth / 2)
+            {
+                HV = Vector3.left * Velocity;
+                rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
+            }
+
+            else if (Input.GetTouch(0).position.x > ScreenWidth / 2)
+            {
+                HV = Vector3.right * Velocity;
+                rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
+            }
+
         }
     }
 
