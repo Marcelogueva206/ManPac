@@ -3784,7 +3784,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7491749463416151050}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eed81e5b5b0889741abcaeb019179469, type: 3}
   m_Name: 
@@ -3893,7 +3893,7 @@ MonoBehaviour:
   txt: {fileID: 275736989}
   fade: {fileID: 144519898}
   textAnimation: 0
-  Velocity: 2
+  realPacmanDirecion: 0
 --- !u!114 &7832844820515440306
 MonoBehaviour:
   m_ObjectHideFlags: 0
