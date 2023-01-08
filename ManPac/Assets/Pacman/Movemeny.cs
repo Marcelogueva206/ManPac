@@ -13,52 +13,41 @@ public class Movemeny : MonoBehaviour
 
 
     public float velocity;
-    public GameObject txt;
-    public GameObject fade;
-    public bool textAnimation;
+  
 
-    //private Rigidbody rb; 
-    //public float Velocity;
-    //private Vector3 HV; 
-    //private float ScreenHeight, ScreenWidth;
+  
     public direcion realPacmanDirecion = direcion.none;
 
     Vector2 pointStarted;
     Vector2 pointEnded;
     void Start()
     {
+        print("eliminé el movimiento por teclado, ahora solo el pacam se puede mover con el mouse o por la pantalla tactil");
         pointStarted = new Vector2(0, 0);
         pointEnded = new Vector2(0, 0);
-        //rb = GetComponent<Rigidbody>();
-        //ScreenHeight = Screen.height; 
-        //ScreenWidth = Screen.width;
-        txt.SetActive(false);
-        fade.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
 
         MovimientoTouch();
-        print(realPacmanDirecion);
-
-        
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)||realPacmanDirecion ==direcion.right)
+      
+       
+        if (realPacmanDirecion ==direcion.right)
         {
             transform.localRotation = Quaternion.Euler(0, 90, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow) || realPacmanDirecion == direcion.left)
+        if ( realPacmanDirecion == direcion.left)
         {
             transform.localRotation = Quaternion.Euler(0, -90, 0);
         }
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow) || realPacmanDirecion == direcion.up)
+        if ( realPacmanDirecion == direcion.up)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow) || realPacmanDirecion == direcion.down)
+        if ( realPacmanDirecion == direcion.down)
         {
             transform.localRotation = Quaternion.Euler(0, 180, 0);
         }
@@ -72,24 +61,19 @@ public class Movemeny : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            usuarioTouch = Input.GetTouch(0);
-        
-
+            usuarioTouch = Input.GetTouch(0);  
             
             if (usuarioTouch.phase == TouchPhase.Began)
             {
 
                 pointStarted = usuarioTouch.position;
-                print(usuarioTouch.position + "pulsó");
             }
 
-            
-
+ 
             if (usuarioTouch.phase == TouchPhase.Ended)
             {
                 
                 pointEnded = usuarioTouch.position;
-                print(usuarioTouch.position + " pulsando");
 
 
                 float diferenceY = pointStarted.y - pointEnded.y;
@@ -98,7 +82,7 @@ public class Movemeny : MonoBehaviour
 
                 if(Mathf.Abs(diferenceX)- Mathf.Abs(diferenceY) > 0) //x es mayor
                 {
-                    print(diferenceX);
+                    
                     if (diferenceX < 0)
                     {
                         realPacmanDirecion = direcion.right;
@@ -111,7 +95,6 @@ public class Movemeny : MonoBehaviour
                 }
                 else // y es mayor
                 {
-                    print(diferenceY);
                     if (diferenceY < 0)
                     {
                         realPacmanDirecion = direcion.up;
@@ -131,31 +114,7 @@ public class Movemeny : MonoBehaviour
             }
 
 
-            //if (Input.GetTouch(0).position.y > ScreenHeight / 2)
-            //{
-            //    HV = Vector3.forward * Velocity;
-            //    rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
-            //}
-
-            //else if (Input.GetTouch(0).position.y < ScreenHeight / 2)
-            //{
-            //    HV = Vector3.back * Velocity;
-            //    rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
-            //}
-
-
-            //if (Input.GetTouch(0).position.x < ScreenWidth / 2)
-            //{
-            //    HV = Vector3.left * Velocity;
-            //    rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
-            //}
-
-            //else if (Input.GetTouch(0).position.x > ScreenWidth / 2)
-            //{
-            //    HV = Vector3.right * Velocity;
-            //    rb.MovePosition(rb.position + HV * Velocity * Time.deltaTime);
-            //}
-
+          
         }
     }
 
@@ -164,11 +123,9 @@ public class Movemeny : MonoBehaviour
         if (other.gameObject.CompareTag("Fantasma"))
         {
 
-
-            textAnimation = true;
+            GameEvents.PacmanDeath.Invoke();
             Destroy(this.gameObject);
-            txt.SetActive(true);
-            fade.SetActive(true);
+            
 
 
         }

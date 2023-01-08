@@ -6,17 +6,11 @@ public class FadeAnimationController : MonoBehaviour
 {
     public Animator anim;
     public bool starAnimation;
-    public Movemeny movement;
+    public EventsManager eventsManager;
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        starAnimation = movement.textAnimation;
+        starAnimation = eventsManager.textAnimation;
         anim.SetBool("Start", starAnimation);
     }
 }
